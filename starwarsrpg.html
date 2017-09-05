@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Star Wars RPG</title>
+	<link rel="stylesheet" type="text/css" href="starwarsrpg.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+
+<body>
+	<div id="heros">
+	<br>
+	<br>
+		<div>
+			<h2>Instructions:</h2>
+			<p>Select a hero. Select an opponent. Click the attack button to fight!</p>
+			<p>Reduce the villian's health to 0 without having the same happen to your hero!</p>
+			<br><br><br><br>
+		</div>
+		<h1>Discover your origins:</h1>
+		<table>
+			<tr>
+				<td>
+					<div class="hero">
+						<img id="obiwan" src="https://www.jedirobeamerica.com/images/product/image/425197219.jpg" height="300" width="300">
+						<p align="center">Obiwan Kenobi</p>
+						<p id="obiwan_health" align="center">Health: 100</p>
+						<p id="obiwan_attack" align="center">Attack: 10</p>
+					</div>
+				</td>
+				<td>
+					<div class="hero">
+						<img id="R2D2" src="https://i.pinimg.com/736x/9b/83/42/9b83425d89147084a736d0baf06bbec5--rd-droid-war-dogs.jpg" height="300" width="300">
+						<p align="center">R2-D2</p>
+						<p id="R2D2_health" align="center">Health: 40</p>
+						<p align="center">Attack: 5</p>
+					</div>
+				</td>
+				<td>
+					<div class="hero">
+						<img id="yoda" src="https://i.pinimg.com/736x/34/cc/1d/34cc1deaabb51f7226280b575778471c--dog-halloween-costumes-star-wars-costumes.jpg" height="300" width="300">
+						<p align="center">Yoda</p>
+						<p id="yoda_health" align="center">Health: 80</p>
+						<p align="center">Attack: 12</p>
+					</div>
+				</td>
+				<td>
+					<div class="hero">
+						<img id="leia" src="https://i.ebayimg.com/00/s/MTUwMFgxMDE1/z/JPoAAOSwfVpYqx~r/$_58.JPG" height="300" width="300">
+						<p align="center">Leia</p>
+						<p id="leia_health" align="center">Health: 70</p>
+						<p align="center">Attack: 8</p>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<hr>
+	<div id="villians">
+		<br><br>
+		<div id="attackButton">Attack!</div>
+
+		<br><br>
+		<h1>Choose your Adversary...</h1>
+		<table>
+			<tr>
+				<td>
+					<div class="villian">
+						<img id="darthvader" src="https://images.incuboom.com/global/images/products/large/big-dog-star-wars-darth-vader-dog-costume-1673.jpg" height="300" width="300">
+						<p align="center">Darth Vader</p>
+						<p id="darthvader_health" align="center">Health: 200</p>
+						<p align="center">Defense: 20</p>
+					</div>
+				</td>
+				<td>
+					<div class="villian">
+						<img id="atat" src="https://www.officialstarwarscostumes.com/-/media/products/oc/star-wars-costumes/star-wars-costume-accessories/99885577-at-at-pet-costume-pet-star-wars-costumes-000.ashx?w=600&h=600&bc=ffffff" height="300" width="300">
+						<p align="center">AT-AT</p>
+						<p id="atat_health" align="center">Health: 400</p>
+						<p align="center">Defense: 10</p>
+					</div>
+				</td>
+				<td>
+					<div class="villian">
+						<img id="sandperson" src="https://www.officialstarwarscostumes.com/-/media/products/oc/star-wars-costumes/kids-star-wars-costumes/99886583-bantha-pet-costume-pet-costumes-000.ashx?w=600&h=600&bc=ffffff" height="300" width="300">
+						<p align="center">Sand Person</p>
+						<p id="sandperson_health" align="center">Health: 40</p>
+						<p align="center">Defense: 6</p>
+					</div>
+				</td>
+				<td>
+					<div class="villian">
+						<img id="stormtrooper" src="https://images-na.ssl-images-amazon.com/images/I/51XbutQ94NL._AC_SL230_.jpg" height="300" width="300">
+						<p align="center">Mounted Storm Trooper</p>
+						<p id="stormtrooper_health" align="center">Health: 50</p>
+						<p align="center">Defense: 8</p>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<script type="text/javascript">
+
+	var heroSelection = ""
+	var villianSelection = ""
+
+	var villianArray = ["darthvader",'atat','sandperson','stormtrooper']
+	var heroArray = ['obiwan','R2D2','yoda','leia']
+
+	var heros={
+		obiwan: [{
+				health: 100},
+				{attack: 10}],
+		R2D2: [{
+				health: 40},
+				{attack: 5}],
+		yoda: [{
+				health: 80},
+				{attack: 12}],
+		leia: [{
+				health: 70},
+				{attack: 8}]
+		}
+
+
+	var villians={
+		darthvader: [{
+				health: 200},
+				{defense: 20}],
+		atat: [{
+				health: 400},
+				{defense: 10}],
+		sandperson: [{
+				health: 40},
+				{defense: 6}],
+		stormtrooper: [{
+				health: 50},
+				{defense: 8}]
+		}
+
+
+
+	
+
+function returnHeroName(){
+	var heroAvatar = String(heroSelection);
+	return heroAvatar;
+}
+
+
+function returnVillianName(){
+	var villianAvatar = String(villianSelection);
+	return villianAvatar;
+}
+
+
+
+//attack button
+		$("#attackButton").on("click", function() {
+
+			console.log("Hero Selection: " + heroSelection);
+			console.log("Villian Selection: " + villianSelection);
+			console.log(heroSelection + " vs. " + villianSelection);
+
+
+			//configure attack and defense mechanics
+
+			attack = heros[returnHeroName()][1]["attack"];
+			defense = villians[returnVillianName()][1]["defense"];
+			healthVillian = villians[returnVillianName()][0]["health"];
+			healthHero = heros[returnHeroName()][0]["health"];
+
+			healthHero = healthHero - defense/2;
+			healthVillian = healthVillian - attack;
+
+			console.log( returnHeroName() +": " + healthHero, returnVillianName() +": " +  healthVillian);
+
+
+
+			//win and loss conditions
+			if (healthHero <= 0 ) {
+				alert("You Lose...")
+			}
+
+			if (healthVillian <= 0) {
+				alert("You Win!!!")
+			}
+
+
+			//report results back to webpage
+
+			villians[returnVillianName()][0]["health"] = healthVillian;
+			heros[returnHeroName()][0]["health"] = healthHero;
+
+
+
+
+			var heroHealthModification = $("#" + returnHeroName() + "_health");
+			heroHealthModification.html("Health: " + heros[returnHeroName()][0]["health"]);
+
+			var villianHealthModification = $("#" + returnVillianName() + "_health");
+			villianHealthModification.html("Health: " + villians[returnVillianName()][0]["health"]);
+
+
+
+
+
+			console.log(heros[returnHeroName()][0]["health"])
+			console.log(villians[returnVillianName()][0]["health"])
+
+		})
+
+
+
+
+
+//configure selection process
+
+		$("#obiwan").on("click", function() {
+			for (i=0; i < heroArray.length; i++){
+				heroSelection = document.getElementById(String(heroArray[i]));
+				heroSelection.classList.remove('selected');
+			}	
+
+			heroSelection = document.getElementById("obiwan");
+			heroSelection.classList.add('selected');
+			heroSelection = heroSelection.id;
+			console.log(heroSelection);
+		});
+
+		$("#R2D2").on("click", function() {
+			for (i=0; i < heroArray.length; i++){
+				heroSelection = document.getElementById(String(heroArray[i]));
+				heroSelection.classList.remove('selected');
+			}
+
+			heroSelection = document.getElementById("R2D2");
+			heroSelection.classList.add('selected');
+			heroSelection = heroSelection.id;
+			console.log(heroSelection);
+		});
+
+		$("#yoda").on("click", function() {
+			for (i=0; i < heroArray.length; i++){
+				heroSelection = document.getElementById(String(heroArray[i]));
+				heroSelection.classList.remove('selected');
+			}
+
+			heroSelection = document.getElementById("yoda");
+			heroSelection.classList.add('selected');
+			heroSelection = heroSelection.id;
+			console.log(heroSelection);
+		});
+
+		$("#leia").on("click", function() {
+			for (i=0; i < heroArray.length; i++){
+				heroSelection = document.getElementById(String(heroArray[i]));
+				heroSelection.classList.remove('selected');
+			}
+			heroSelection = document.getElementById("leia");
+			heroSelection.classList.add('selected');
+			heroSelection = heroSelection.id;
+			console.log(heroSelection);
+		});
+
+		// -------------------------------------
+
+
+		$("#darthvader").on("click", function() {
+			for (i=0; i < villianArray.length; i++){
+				villianSelection = document.getElementById(String(villianArray[i]));
+				villianSelection.classList.remove('selected');
+			}
+
+			villianSelection = document.getElementById("darthvader");
+			villianSelection.classList.add('selected');
+			villianSelection = villianSelection.id;
+			console.log(villianSelection);
+		});
+
+		$("#atat").on("click", function() {
+			for (i=0; i < villianArray.length; i++){
+				villianSelection = document.getElementById(String(villianArray[i]));
+				villianSelection.classList.remove('selected');
+			}
+
+			villianSelection = document.getElementById("atat");
+			villianSelection.classList.add('selected');
+			villianSelection = villianSelection.id;
+			console.log(villianSelection);
+		});
+
+		$("#sandperson").on("click", function() {
+			for (i=0; i < villianArray.length; i++){
+				villianSelection = document.getElementById(String(villianArray[i]));
+				villianSelection.classList.remove('selected');
+			}
+
+			villianSelection = document.getElementById("sandperson");
+			villianSelection.classList.add('selected');
+			villianSelection = villianSelection.id;
+			console.log(villianSelection);
+		});
+
+		$("#stormtrooper").on("click", function() {
+			for (i=0; i < villianArray.length; i++){
+				villianSelection = document.getElementById(String(villianArray[i]));
+				villianSelection.classList.remove('selected');
+			}
+
+			villianSelection = document.getElementById("stormtrooper");
+			villianSelection.classList.add('selected');
+			villianSelection = villianSelection.id;
+			console.log(villianSelection);
+		});
+
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body{
+	background-image: url(http://www.planwallpaper.com/static/images/starwarsinfive-1449855236991_large.jpg);
+	background-attachment: fixed;
+	background-size: 100%;
+}
+
+img {
+	margin: 20px;
+	opacity: 0.7;
+	border: solid;
+	border-width: 5px;
+	border-color: black;
+
+}
+
+table{
+	align-content: center;
+	margin: auto;
+}
+
+img:hover {
+	opacity: 1;
+	transition: 0.5s;
+}
+
+
+h1{
+	color: white;
+}
+
+h2{
+	color: white;
+}
+
+p{
+	color: white;
+}
+
+
+
+.hero .selected{
+	opacity: 1;
+	border: solid;
+	border-width: 5px;
+	border-color: lightgreen;
+}
+
+
+.villian .selected{
+	opacity: 1;
+	border: solid;
+	border-width: 5px;
+	border-color: red;
+}
+
+#attackButton{
+	background-color: red;
+	color: white;
+	font-size: 200%;
+	align-content: center;
+	width: 30%;
+}
